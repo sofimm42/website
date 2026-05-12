@@ -29,18 +29,61 @@
 
     <h2>Request Service</h2>
 
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <input type="text" placeholder="Boat / Issue" required>
+    <form action="https://formspree.io/f/xdabbkwj" method="POST" id="contact-form">
 
-      <textarea placeholder="Describe the problem..." rows="5"></textarea>
+      <!-- Honeypot spam protection -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+
+      <input type="email" name="email" placeholder="Your Email" required>
+
+      <input type="text" name="service" placeholder="Boat / Issue" required>
+
+      <textarea name="message" placeholder="Describe the problem..." rows="5"></textarea>
 
       <button type="submit">Send Request</button>
+
     </form>
 
   </main>
 
+  <a href="tel:1234567890" class="call-button">
+    📞 Call Now
+  </a>
+
+  <!-- FIXED MOBILE-SAFE FORM HANDLER -->
+  <script>
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // give mobile time to finish request
+          setTimeout(() => {
+            window.location.href = "thank-you.html";
+          }, 400);
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+
+      } catch (error) {
+        alert("Network error. Please check your connection and try again.");
+      }
+    });
+  </script>
+
 </body>
-<a href="tel:1234567890" class="call-button">📞 Call Now</a>
 </html>
