@@ -31,10 +31,8 @@
 
     <h2>Request Service</h2>
 
-    <!-- ONLY THIS PART IS YOUR NEW FORM -->
-    <form action="https://formspree.io/f/xdabbkwj" method="POST">
-
-      <input type="hidden" name="_next" value="https://sofimm42.github.io/website/thank-you.html">
+    <!-- BOOKING FORM -->
+    <form id="contact-form">
 
       <input type="text" name="name" placeholder="Your Name" required>
 
@@ -44,13 +42,53 @@
 
       <textarea name="message" placeholder="Describe the problem..." rows="5"></textarea>
 
-      <button type="submit">Send Request</button>
+      <button type="submit" id="submitBtn">Send Request</button>
+
+      <p id="status"></p>
 
     </form>
 
   </main>
 
   <a href="tel:1234567890" class="call-button">📞 Call Now</a>
+
+  <!-- FIXED FORM SCRIPT -->
+  <script>
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+    const btn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      status.textContent = "Sending...";
+
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch("https://formspree.io/f/xdabbkwj", {
+          method: "POST",
+          body: data,
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (res.ok) {
+          form.reset();
+          window.location.href = "thank-you.html";
+        } else {
+          status.textContent = "Something went wrong. Try again.";
+        }
+
+      } catch (err) {
+        status.textContent = "Network error. Try again.";
+      }
+
+      btn.disabled = false;
+    });
+  </script>
 
 </body>
 </html>
