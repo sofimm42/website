@@ -180,3 +180,51 @@ button:hover {
   list-style: none;
   line-height: 2;
 }
+
+.booking-card {
+  margin-top: 20px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start; /* keeps it left-aligned */
+}
+
+.booking-card input,
+.booking-card textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.booking-card input:focus,
+.booking-card textarea:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
+}
+
+.booking-card button {
+  padding: 12px 18px;
+  background: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-self: flex-start; /* button aligns left like a real form */
+}
+
+.booking-card button:hover {
+  background: #009bb3;
+}
+
+#status {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}

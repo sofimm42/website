@@ -6,6 +6,44 @@
   <title>Contact | Climate Control Marine</title>
 
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* quick clean styling so it looks good immediately */
+    .booking-card {
+      max-width: 520px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .booking-card input,
+    .booking-card textarea {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .booking-card button {
+      padding: 12px;
+      font-size: 16px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .booking-card button:disabled {
+      opacity: 0.6;
+    }
+
+    #status {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -31,63 +69,76 @@
 
     <h2>Request Service</h2>
 
-    <!-- BOOKING FORM -->
-    <form id="contact-form">
+    <!-- FORM UI -->
+    <div class="booking-card">
 
-      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" id="name" placeholder="Your Name" required>
 
-      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="email" id="email" placeholder="Your Email" required>
 
-      <input type="text" name="service" placeholder="Boat / Issue" required>
+      <input type="text" id="service" placeholder="Boat / Issue" required>
 
-      <textarea name="message" placeholder="Describe the problem..." rows="5"></textarea>
+      <textarea id="message" placeholder="Describe the problem..." rows="5"></textarea>
 
-      <button type="submit" id="submitBtn">Send Request</button>
+      <button onclick="sendForm()" id="btn">Send Request</button>
 
       <p id="status"></p>
 
-    </form>
+    </div>
 
   </main>
 
   <a href="tel:1234567890" class="call-button">📞 Call Now</a>
 
-  <!-- FIXED FORM SCRIPT -->
+  <!-- FAST SUBMISSION (NO PAGE RELOAD, NO FORMSPREE PAGE) -->
   <script>
-    const form = document.getElementById("contact-form");
-    const status = document.getElementById("status");
-    const btn = document.getElementById("submitBtn");
+    async function sendForm() {
+      const btn = document.getElementById("btn");
+      const status = document.getElementById("status");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        service: document.getElementById("service").value,
+        message: document.getElementById("message").value
+      };
+
+      if (!data.name || !data.email || !data.service) {
+        status.textContent = "Please fill out required fields.";
+        return;
+      }
 
       btn.disabled = true;
       status.textContent = "Sending...";
 
-      const data = new FormData(form);
-
       try {
         const res = await fetch("https://formspree.io/f/xdabbkwj", {
           method: "POST",
-          body: data,
           headers: {
+            "Content-Type": "application/json",
             "Accept": "application/json"
-          }
+          },
+          body: JSON.stringify(data)
         });
 
         if (res.ok) {
-          form.reset();
-          window.location.href = "thank-you.html";
+          status.textContent = "Request sent!";
+
+          document.getElementById("name").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("service").value = "";
+          document.getElementById("message").value = "";
+
         } else {
-          status.textContent = "Something went wrong. Try again.";
+          status.textContent = "Error sending request.";
         }
 
       } catch (err) {
-        status.textContent = "Network error. Try again.";
+        status.textContent = "Network error.";
       }
 
       btn.disabled = false;
-    });
+    }
   </script>
 
 </body>
