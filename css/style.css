@@ -232,6 +232,12 @@ footer {
   transition: 0.2s ease;
 }
 
+@media (max-width: 600px) {
+  .footer-socials a img {
+    width: 42px;
+    height: 42px;
+  }
+}
 .footer-socials a img:hover {
   transform: scale(1.1);
 }
