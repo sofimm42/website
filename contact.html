@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* quick clean styling so it looks good immediately */
     .booking-card {
       max-width: 520px;
       margin: 30px auto;
@@ -33,10 +32,6 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-    }
-
-    .booking-card button:disabled {
-      opacity: 0.6;
     }
 
     #status {
@@ -69,28 +64,37 @@
 
     <h2>Request Service</h2>
 
-    <!-- FORM UI -->
     <div class="booking-card">
-
       <input type="text" id="name" placeholder="Your Name" required>
-
       <input type="email" id="email" placeholder="Your Email" required>
-
       <input type="text" id="service" placeholder="Boat / Issue" required>
-
       <textarea id="message" placeholder="Describe the problem..." rows="5"></textarea>
 
       <button onclick="sendForm()" id="btn">Send Request</button>
-
       <p id="status"></p>
-
     </div>
 
   </main>
 
+  <!-- ONLY CALL BUTTON -->
   <a href="tel:1234567890" class="call-button">📞 Call Now</a>
 
-  <!-- FAST SUBMISSION (NO PAGE RELOAD, NO FORMSPREE PAGE) -->
+  <footer>
+    <p>Climate Control Marine © 2026</p>
+
+    <div class="footer-socials">
+
+      <a href="https://www.instagram.com/climatecontrolmarine/" target="_blank">
+        <img src="images/instagram.png" alt="Instagram">
+      </a>
+
+      <a href="https://www.tiktok.com/@climatecontrolmarine" target="_blank">
+        <img src="images/tiktok.png" alt="TikTok">
+      </a>
+
+    </div>
+  </footer>
+
   <script>
     async function sendForm() {
       const btn = document.getElementById("btn");
@@ -121,16 +125,13 @@
           body: JSON.stringify(data)
         });
 
-        if (res.ok) {
-          status.textContent = "Request sent!";
+        status.textContent = res.ok ? "Request sent!" : "Error sending request.";
 
+        if (res.ok) {
           document.getElementById("name").value = "";
           document.getElementById("email").value = "";
           document.getElementById("service").value = "";
           document.getElementById("message").value = "";
-
-        } else {
-          status.textContent = "Error sending request.";
         }
 
       } catch (err) {
@@ -141,18 +142,5 @@
     }
   </script>
 
-<footer>
-  <p>Climate Control Marine © 2026</p>
-
-  <div class="socials">
-    <a href="https://www.instagram.com/climatecontrolmarine/" target="_blank">
-      Instagram
-    </a>
-
-    <a href="https://www.tiktok.com/@climatecontrolmarine" target="_blank">
-      TikTok
-    </a>
-  </div>
-</footer>
 </body>
 </html>

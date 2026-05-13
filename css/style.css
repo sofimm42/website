@@ -18,28 +18,20 @@ header {
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
-header h2 {
-  color: white;
-  margin-bottom: 10px;
-}
-
-/* LOGO (FIXED RESPONSIVE) */
+/* LOGO */
 .logo {
   display: block;
   margin: 0 auto 10px auto;
-
-  width: auto;
-  height: auto;
-
   max-height: 60px;
   max-width: 220px;
-
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 
-/* MOBILE LOGO FIX */
 @media (max-width: 768px) {
   .logo {
     max-height: 45px;
@@ -59,16 +51,14 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  letter-spacing: 0.5px;
   transition: 0.3s;
-  padding: 6px 0;
 }
 
 nav a:hover {
   color: #00bcd4;
 }
 
-/* MAIN CONTENT */
+/* MAIN */
 main {
   padding: 40px;
   max-width: 1000px;
@@ -82,10 +72,7 @@ main {
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  background: url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1974&auto=format&fit=crop")
-  center/cover no-repeat;
-
+  background: url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1974&auto=format&fit=crop") center/cover no-repeat;
   color: white;
   position: relative;
   padding: 40px;
@@ -95,7 +82,7 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.55);
 }
 
 .hero h1,
@@ -114,21 +101,16 @@ main {
   font-size: 18px;
   margin-bottom: 20px;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.5;
 }
 
 .hero a {
   display: inline-block;
-  margin-top: 20px;
   padding: 12px 25px;
   background: #00bcd4;
   color: white;
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
-  transition: 0.3s;
 }
 
 .hero a:hover {
@@ -150,16 +132,14 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
-  outline: none;
-  transition: 0.2s;
 }
 
 input:focus,
 textarea:focus {
   border-color: #00bcd4;
-  box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
 }
 
+/* BUTTONS */
 button {
   padding: 12px;
   background: #00bcd4;
@@ -168,30 +148,31 @@ button {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
   background: #009bb3;
 }
 
-/* CALL BUTTON */
+/* CALL BUTTON (ONLY FLOATING ELEMENT) */
 .call-button {
   position: fixed;
-  bottom: 20px;
   right: 20px;
+  bottom: 20px;
   background: #00bcd4;
   color: white;
   padding: 12px 18px;
   border-radius: 50px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   z-index: 9999;
 }
 
-.call-button:hover {
-  background: #009bb3;
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  .call-button {
+    bottom: 20px;
+  }
 }
 
 /* TRUST SECTION */
@@ -201,10 +182,6 @@ button:hover {
   padding: 20px;
 }
 
-.trust h2 {
-  margin-bottom: 15px;
-}
-
 .trust ul {
   list-style: none;
   line-height: 2;
@@ -212,13 +189,11 @@ button:hover {
 
 /* BOOKING FORM */
 .booking-card {
-  margin-top: 20px;
   max-width: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: flex-start;
 }
 
 .booking-card input,
@@ -227,28 +202,10 @@ button:hover {
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 16px;
 }
 
 .booking-card button {
-  padding: 12px 18px;
-  background: #00bcd4;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
   align-self: flex-start;
-}
-
-.booking-card button:hover {
-  background: #009bb3;
-}
-
-#status {
-  font-size: 14px;
-  color: #333;
-  margin-top: 5px;
 }
 
 /* FOOTER */
@@ -260,17 +217,21 @@ footer {
   margin-top: 60px;
 }
 
-.socials {
+/* FOOTER SOCIAL ICONS */
+.footer-socials {
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-.socials a {
-  color: #00bcd4;
-  margin: 0 12px;
-  text-decoration: none;
-  font-weight: bold;
+.footer-socials a img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  transition: 0.2s ease;
 }
 
-.socials a:hover {
-  color: white;
+.footer-socials a img:hover {
+  transform: scale(1.1);
 }
